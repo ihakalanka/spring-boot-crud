@@ -1,6 +1,6 @@
 package com.akalanka.springbootcrud.controller;
 
-import com.akalanka.springbootcrud.dto.UserDto;
+import com.akalanka.springbootcrud.dto.UserDTO;
 import com.akalanka.springbootcrud.entity.User;
 import com.akalanka.springbootcrud.service.UserServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -23,8 +23,15 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public UserDto[] getUsers(){
-        UserDto[] userDtos = modelMapper.map(userService.getUsers(),UserDto[].class);
+    public UserDTO[] getUsers(){
+        UserDTO[] userDtos = modelMapper.map(userService.getUsers(), UserDTO[].class);
         return userDtos;
+    }
+
+    @GetMapping("/user/{id}")
+    public UserDTO getUserById(@PathVariable Long id){
+        User user = userService.getUserById(id);
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        return userDTO;
     }
 }
