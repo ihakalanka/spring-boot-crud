@@ -1,6 +1,7 @@
 package com.akalanka.springbootcrud.service;
 
 import com.akalanka.springbootcrud.entity.User;
+import com.akalanka.springbootcrud.exception.ResourceNotFoundException;
 import com.akalanka.springbootcrud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        return null;
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not exist with id : " + id));
     }
 }
