@@ -26,12 +26,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<HttpStatus> updateUser(User user, Long id) {
-        return null;
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id :" + id));
+        existingUser.setName(user.getName());
+        existingUser.setAddress(user.getAddress());
+        existingUser.setIndexNo(user.getIndexNo());
+        userRepository.save(existingUser);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<HttpStatus> deleteUser(Long id) {
-        return null;
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id :" + id));
+        userRepository.delete(existingUser);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override

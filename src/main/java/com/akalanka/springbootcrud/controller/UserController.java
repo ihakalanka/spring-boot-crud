@@ -34,4 +34,16 @@ public class UserController {
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
         return userDTO;
     }
+
+    @PutMapping("/update/{id}")
+    public User updateUser(@RequestBody User user, @PathVariable Long id){
+        userService.updateUser(user,id);
+        return user;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
+        return "User deleted successfully";
+    }
 }
