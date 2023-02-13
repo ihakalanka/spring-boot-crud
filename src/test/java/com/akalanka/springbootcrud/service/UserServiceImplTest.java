@@ -14,6 +14,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,8 +86,23 @@ class UserServiceImplTest {
     }
 
     @Test
-    @Disabled
     void updateUser() {
+        User user = new User(
+                1L,
+                "Akalanka",
+                "Kandy",
+                "IT18112356"
+        );
+
+        Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        User user1 = new User(
+                1L,
+                "Tharindu",
+                "Kandy",
+                "IT18112356"
+        );
+        Mockito.when(userRepository.save(user)).thenReturn(user);
+        assertThat(userServiceTest.updateUser(user1, 1L)).isEqualTo(new ResponseEntity<>(HttpStatus.OK));
     }
 
     @Test
