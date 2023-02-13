@@ -89,8 +89,17 @@ class UserServiceImplTest {
     }
 
     @Test
-    @Disabled
     void deleteUser() {
+        User user = new User(
+                1L,
+                "Akalanka",
+                "Kandy",
+                "IT18112356"
+        );
+
+        Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        userServiceTest.deleteUser(1L);
+        verify(userRepository).delete(user);
     }
 
     @Test
