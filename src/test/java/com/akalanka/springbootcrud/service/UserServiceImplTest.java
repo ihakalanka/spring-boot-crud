@@ -10,12 +10,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +29,14 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
 
-@ExtendWith(MockitoExtension.class)
+//amigoscodeMethod
+//@ExtendWith(MockitoExtension.class)
+//mockitoMethod
+@RunWith(SpringRunner.class)
+@SpringBootTest
 class UserServiceImplTest {
-    @Mock
+    //amigoscodeMethod
+    /*@Mock
     private UserRepository userRepository;
     private UserServiceImpl userServiceTest;
 
@@ -34,6 +44,13 @@ class UserServiceImplTest {
     void setUp() {
         userServiceTest = new UserServiceImpl(userRepository);
     }
+    */
+
+    //mockitoMethod
+    @Autowired
+    private UserServiceImpl userServiceTest;
+    @MockBean
+    private UserRepository userRepository;
 
     @Test
     void saveUser() {
